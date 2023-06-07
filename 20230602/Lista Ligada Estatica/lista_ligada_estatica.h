@@ -17,7 +17,8 @@ void create_list(Lista *);
 void free_list(Lista *);
 int return_size(Lista *);
 void print_list(Lista *);
-void insert_number(Lista *, int);
+void insert_number(Lista *, int); //Insere um elemento na lista de forma ordenada.
+void insert_last_number (Lista *, int); //Insere um elemento no final da lista.
 void delete_number(Lista *, int);
 int return_full(Lista *);
 int return_empty(Lista *);
