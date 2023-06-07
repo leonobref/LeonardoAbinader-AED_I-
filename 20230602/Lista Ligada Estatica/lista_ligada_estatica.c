@@ -61,6 +61,28 @@ void insert_number(Lista *vec, int new_element){
     }
 }
 
+void insert_last_number(Lista *vec, int new_element){
+    if (vec -> disponivel == -1)
+        return;
+    int i = vec -> inicio;
+    int antecessor = -1;
+    while (i != -1){
+        antecessor = i;
+        i = vec -> list[i].next;
+    }
+    int disp = vec -> disponivel;
+    if (vec -> disponivel != -1)
+        vec -> disponivel = vec -> list[disp].next;
+    vec -> list[disp].l = new_element;
+    if (antecessor == -1){ // Se for inserido no começo da lista.
+        vec -> list[disp].next = vec->inicio;
+        vec -> inicio = disp;
+    } else{ // Se for inserido depois de outro elemento.
+        vec -> list[disp].next = vec -> list[antecessor].next;
+        vec -> list[antecessor].next = disp;
+    }
+}
+
 void delete_number(Lista *vec, int element){
     int i = vec -> inicio;
     int antecessor = -1;
@@ -161,10 +183,13 @@ void listcpy(Lista *L1, Lista *L2){
 //Concatena a Lista L1 com a Lista L2 em uma nova Lista.
 Lista listcnt(Lista *L1, Lista *L2){
     Lista L3;
+    if (return_size(L1) + return_size(L2) > 100)
+        return L3;
+
     listcpy(L1, &L3);
     int i = L2 -> inicio;
     while (i != -1){
-        insert_number(&L3, L2 -> list[i].l);
+        insert_last_number(&L3, L2 -> list[i].l);
         i = L2 -> list[i].next;
     }
     return L3;
@@ -173,27 +198,22 @@ Lista listcnt(Lista *L1, Lista *L2){
 //Insere os Elementos de L1 e de L2 em uma nova lista de forma intercalada.
 Lista listint(Lista *L1, Lista *L2){
     Lista L3;
-    listcpy(L1, &L3);
-    if (return_size(L1) != return_size(L2))
+    create_list(&L3);
+    if (return_size(L1) + return_size(L2) > 100)
         return L3;
     
     int i = L1 -> inicio;
     int j = L2 -> inicio;
-    int cont = 0;
-    while (i != -1){
-        if (cont % 2 == 1){
-            delete_number(&L3, L1 ->list[i].l);
+
+    while (i != -1 || j != -1){
+        if (i != -1){
+            insert_last_number(&L3, L1 ->list[i].l);
+            i = L1 ->list[i].next;
         }
-        i = L1 -> list[i].next;
-        cont++;
-    }
-    cont = 0;
-    while (j != -1){
-        if (cont % 2 == 1){
-            insert_number(&L3, L2 -> list[j].l);
+        if (j != -1){
+            insert_last_number(&L3, L2 ->list[j].l);
+            j = L2 ->list[j].next;
         }
-        j = L2 -> list[j].next;
-        cont ++;
     }
     return L3;
 }
