@@ -26,11 +26,12 @@ int main()
     inserir_elemento_ordenado(L, 12);
     excluir_elemento_valor(L, 45);
 
+    alterar_elemento_valor(L, 25, 22);
     imprimir_elementos(L);
     printf("\nTamanho lista: %d\n", tamanho_lista(L));
+
+
 
     liberar_lista(&L);
     return 0;
 }
-
-
