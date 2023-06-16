@@ -22,5 +22,8 @@ void excluir_elemento_comeco(Lista *);
 void excluir_elemento_final(Lista *);
 void excluir_elemento_valor(Lista *, int);
 
+void alterar_elemento_valor(Lista*, int, int);
+
 void liberar_lista(Lista **);
+
 #endif
