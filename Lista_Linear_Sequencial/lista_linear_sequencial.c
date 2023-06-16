@@ -146,3 +146,8 @@ void liberar_lista(Lista **lista){
     free(vec_ref);
     *lista = NULL;
 }
+
+void alterar_elemento_valor(Lista *L, int novoelemento, int velhoelemento){
+    excluir_elemento_valor(L, velhoelemento);
+    inserir_elemento_ordenado(L, novoelemento);
+};
