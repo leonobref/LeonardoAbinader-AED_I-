@@ -61,6 +61,7 @@ Paciente* busca(Tabela_Hash tabela, int cod_pac){
     return NULL;
 }
 
+//Exercicio
 void excluir (Tabela_Hash tabela, int cod_pac){
     int chave = chave_hash(cod_pac);
     Elemento *i = tabela[chave];
